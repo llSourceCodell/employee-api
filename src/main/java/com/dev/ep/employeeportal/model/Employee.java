@@ -2,6 +2,7 @@ package com.dev.ep.employeeportal.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "employees")
@@ -23,14 +24,26 @@ public class Employee implements Serializable {
     @Column
     private Location location;
 
-    public Employee(String firstName, String lastName, Designation designation, Location location) {
+    @Column
+    private LocalDateTime createdAt;
+
+    @Column
+    private LocalDateTime editedAt;
+
+    @Column
+    private boolean active;
+
+    protected Employee() {
+    }
+
+    public Employee(String firstName, String lastName, Designation designation, Location location, LocalDateTime createdAt, LocalDateTime editedAt, boolean active) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.designation = designation;
         this.location = location;
-    }
-
-    protected Employee() {
+        this.createdAt = createdAt;
+        this.editedAt = editedAt;
+        this.active = active;
     }
 
     public String getFirstName() {
@@ -65,6 +78,30 @@ public class Employee implements Serializable {
         this.location = location;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getEditedAt() {
+        return editedAt;
+    }
+
+    public void setEditedAt(LocalDateTime editedAt) {
+        this.editedAt = editedAt;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -73,6 +110,9 @@ public class Employee implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", designation=" + designation +
                 ", location=" + location +
+                ", createdAt=" + createdAt +
+                ", editedAt=" + editedAt +
+                ", active=" + active +
                 '}';
     }
 }
